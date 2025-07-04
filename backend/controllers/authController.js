@@ -7,13 +7,15 @@ const jwt = require('jsonwebtoken');
 // @access  Public
 exports.register = async (req, res, next) => {
     try {
-        const { name, email, password, role } = req.body;
-        const user = await User.create({
-            name,
-            email,
-            password,
-            role
-        });
+        const { name, email, password, role, worker, client } = req.body;
+        const userData = { name, email, password, role };
+        if (role === 'worker' && worker) {
+            userData.worker = worker;
+        }
+        if (role === 'client' && client) {
+            userData.client = client;
+        }
+        const user = await User.create(userData);
         const userObj = user.toObject();
         delete userObj.password;
         res.status(201).json({

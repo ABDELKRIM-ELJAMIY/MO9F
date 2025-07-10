@@ -2,14 +2,15 @@ const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-// @desc    Register user
-// @route   POST /api/auth/register
-// @access  Public
+
 exports.register = async (req, res, next) => {
     try {
         const { name, email, password, role, worker, client } = req.body;
         const userData = { name, email, password, role };
-        if (role === 'worker' && worker) {
+        if (role === 'worker') {
+            if (!worker || !worker.corpsDeMetier) {
+                return res.status(400).json({ success: false, msg: 'Le champ corpsDeMetier est requis pour les ouvriers.' });
+            }
             userData.worker = worker;
         }
         if (role === 'client' && client) {
@@ -28,9 +29,7 @@ exports.register = async (req, res, next) => {
     }
 };
 
-// @desc    Login user
-// @route   POST /api/auth/login
-// @access  Public
+
 exports.login = async (req, res, next) => {
     try {
         const { email, password } = req.body;
@@ -51,11 +50,32 @@ exports.login = async (req, res, next) => {
     }
 };
 
-// Get token from model, create cookie and send response
 const sendTokenResponse = (user, statusCode, res) => {
     const token = user.getSignedJwtToken();
     res.status(statusCode).json({
         success: true,
         token
     });
+};
+
+exports.logout = (req, res) => {
+    res.status(200).json({ success: true, message: 'Déconnexion réussie.' });
+};
+
+exports.validateToken = async (req, res) => {
+    const authHeader = req.headers['authorization'];
+    if (!authHeader || !authHeader.startsWith('Bearer ')) {
+        return res.status(401).json({ success: false, message: 'Token manquant ou invalide.' });
+    }
+    const token = authHeader.split(' ')[1];
+    try {
+        const decoded = jwt.verify(token, process.env.JWT_SECRET || 'secret');
+        const user = await User.findById(decoded.id).select('-password');
+        if (!user) {
+            return res.status(404).json({ success: false, message: 'Utilisateur non trouvé.' });
+        }
+        res.json({ success: true, user });
+    } catch (err) {
+        res.status(401).json({ success: false, message: 'Token invalide.' });
+    }
 };

@@ -51,4 +51,33 @@ Suivez ces instructions pour mettre en place et lancer le projet sur votre machi
 Les endpoints d'authentification sont disponibles sur la route `/api/auth`:
 
 -   `POST /api/auth/register` : Enregistrer un nouvel utilisateur.
--   `POST /api/auth/login` : Connecter un utilisateur existant. 
+-   `POST /api/auth/login` : Connecter un utilisateur existant.
+
+## Avancement du Backend (Résumé en français)
+
+### 1. Mise en place de la structure de base
+- Serveur Express configuré avec connexion à MongoDB.
+- Activation de CORS et gestion des requêtes JSON.
+- Organisation du projet en dossiers (controllers, models, routes, config).
+
+### 2. Authentification
+- Inscription et connexion sécurisées pour les utilisateurs (ouvriers/clients) avec JWT et bcrypt.
+- Hachage des mots de passe lors de l'inscription.
+- Vérification des identifiants et génération de token JWT à la connexion.
+- Gestion multi-rôles (ouvrier, client) avec un schéma utilisateur flexible.
+
+### 3. Gestion des ouvriers
+- Création et mise à jour du profil professionnel (nom, photo, métier, expérience, description, localisation, disponibilité, tarifs).
+- Mise à jour en temps réel de la disponibilité (disponible/occupé).
+- Consultation des demandes reçues de la part des clients et possibilité d'y répondre (accepter/refuser).
+- Endpoint pour consulter les avis (actuellement stub/vide).
+
+### 4. Gestion des clients
+- Possibilité d'envoyer une demande de contact à un ouvrier spécifique, avec type de service et niveau d'urgence.
+- Les demandes sont enregistrées en base de données et liées à l'ouvrier et au client.
+
+### 5. Modèle de demande (DemandeContact)
+- Chaque demande contient : contenu, date d'envoi, statut (en attente/acceptée/refusée), type de service, urgence, références vers l'ouvrier et le client.
+
+### 6. Organisation des routes
+- Séparation claire des endpoints pour l'authentification, les ouvriers et les clients dans des fichiers routes distincts.

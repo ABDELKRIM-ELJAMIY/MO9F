@@ -7,5 +7,7 @@ router.post('/demande', protect, authorizeRoles('client'), clientController.envo
 
 // Add profile update route for client
 router.put('/profil/:id', protect, authorizeRoles('client'), clientController.updateProfile);
+// Supprimer le compte client
+router.delete('/profil/:id', protect, authorizeRoles('client'), clientController.deleteAccount);
 
 module.exports = router; 

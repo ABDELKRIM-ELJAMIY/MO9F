@@ -98,4 +98,18 @@ exports.searchOuvriers = async (req, res) => {
     } catch (err) {
         res.status(400).json({ success: false, msg: err.message });
     }
+};
+
+// Supprimer le compte ouvrier
+exports.deleteAccount = async (req, res) => {
+    try {
+        const ouvrierId = req.params.id;
+        const deleted = await require('../models/User').findOneAndDelete({ _id: ouvrierId, role: 'worker' });
+        if (!deleted) {
+            return res.status(404).json({ success: false, msg: 'Ouvrier non trouvé.' });
+        }
+        res.status(200).json({ success: true, msg: 'Compte ouvrier supprimé.' });
+    } catch (err) {
+        res.status(400).json({ success: false, msg: err.message });
+    }
 }; 

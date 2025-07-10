@@ -18,4 +18,7 @@ router.get('/avis', protect, authorizeRoles('ouvrier'), ouvrierController.getAvi
 router.get('/rechercher', protect, authorizeRoles('ouvrier'), require('../controllers/ouvrierController').searchOuvriers);
 router.put('/profil/:id', protect, authorizeRoles('ouvrier'), require('../controllers/ouvrierController').updateProfile);
 
+// Supprimer le compte ouvrier
+router.delete('/profil/:id', protect, authorizeRoles('ouvrier'), ouvrierController.deleteAccount);
+
 module.exports = router; 

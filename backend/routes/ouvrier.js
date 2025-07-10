@@ -1,22 +1,21 @@
 const express = require('express');
 const router = express.Router();
 const ouvrierController = require('../controllers/ouvrierController');
+const { protect, authorizeRoles } = require('../middleware/auth');
 
 // Mettre à jour la disponibilité
-
-router.patch('/disponibilite', ouvrierController.updateDisponibilite);
+router.patch('/disponibilite', protect, authorizeRoles('ouvrier'), ouvrierController.updateDisponibilite);
 
 // Consulter les demandes 
-router.get('/demandes', ouvrierController.getDemandes);
+router.get('/demandes', protect, authorizeRoles('ouvrier'), ouvrierController.getDemandes);
 
 // Répondre à une demande 
-
-router.post('/demandes/:id/repondre', ouvrierController.repondreDemande);
+router.post('/demandes/:id/repondre', protect, authorizeRoles('ouvrier'), ouvrierController.repondreDemande);
 
 // Voir les avis 
-router.get('/avis', ouvrierController.getAvis);
+router.get('/avis', protect, authorizeRoles('ouvrier'), ouvrierController.getAvis);
 
-router.get('/rechercher', require('../controllers/ouvrierController').searchOuvriers);
-router.put('/profil/:id', require('../controllers/ouvrierController').updateProfile);
+router.get('/rechercher', protect, authorizeRoles('ouvrier'), require('../controllers/ouvrierController').searchOuvriers);
+router.put('/profil/:id', protect, authorizeRoles('ouvrier'), require('../controllers/ouvrierController').updateProfile);
 
 module.exports = router; 

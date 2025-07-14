@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 
 const workerSchema = new mongoose.Schema({
     photo: String,
-    corpsDeMetier: String,
+    corpsDeMetier: { type: mongoose.Schema.Types.ObjectId, ref: 'CorpsDeMetier', required: false },
     experience: String,
     description: String,
     localisation: String,
@@ -21,10 +21,19 @@ const clientSchema = new mongoose.Schema({
     telephone: String
 }, { _id: false });
 
+const adminSchema = new mongoose.Schema({
+    niveau: String,
+    permissions: [String]
+}, { _id: false });
+
 const userSchema = new mongoose.Schema({
     name: {
         type: String,
         required: true
+    },
+    prenom: {
+        type: String,
+        required: false
     },
     email: {
         type: String,
@@ -39,6 +48,10 @@ const userSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    actif: {
+        type: Boolean,
+        default: true
+    },
     worker: {
         type: workerSchema,
         required: function () { return this.role === 'worker'; }
@@ -46,6 +59,10 @@ const userSchema = new mongoose.Schema({
     client: {
         type: clientSchema,
         required: function () { return this.role === 'client'; }
+    },
+    admin: {
+        type: adminSchema,
+        required: function () { return this.role === 'admin'; }
     }
 }, {
     timestamps: true

@@ -1,4 +1,5 @@
-import { motion as Motion } from 'framer-Motion';
+
+import { motion as Motion } from 'framer-motion';
 import workerImg from '../../assets/worker.jpg';
 import clientImg from '../../assets/client.jpg';
 import moroccanPattern from '../../assets/pattern.png';
@@ -6,7 +7,10 @@ import moroccanPattern from '../../assets/pattern.png';
 const HomePage = () => {
     return (
         <div className="min-h-screen bg-gradient-to-br from-[#0F2027] via-[#203A43] to-[#2C5364] relative overflow-hidden text-[#F1F5F9]">
-            <div className="absolute inset-0 opacity-10 bg-center bg-cover pointer-events-none" style={{ backgroundImage: `url(${moroccanPattern})` }} />
+            <div
+                className="absolute inset-0 opacity-10 bg-center bg-cover pointer-events-none"
+                style={{ backgroundImage: `url(${moroccanPattern})` }}
+            />
 
             <Motion.div
                 className="container mx-auto px-4 py-20 relative z-10 flex flex-col lg:flex-row items-center justify-between gap-12"
@@ -40,11 +44,17 @@ const HomePage = () => {
                         animate={{ y: 0, opacity: 1 }}
                         transition={{ delay: 0.5, duration: 0.6 }}
                     >
-                        <a href="/login" className="bg-[#9D4EDD] hover:bg-[#7B2CBF] text-white font-semibold px-6 py-3 rounded-xl shadow-lg transition-transform transform hover:scale-105">
-                            Se connecter
-                        </a>
-                        <a href="/register" className="border-2 border-[#14FFEC] text-[#14FFEC] hover:bg-[#14FFEC] hover:text-[#0F2027] font-semibold px-6 py-3 rounded-xl transition-transform transform hover:scale-105">
+                        <a
+                            href="/register"
+                            className="bg-[#14FFEC] hover:bg-[#0fdac5] text-black font-semibold px-6 py-3 rounded-xl shadow-lg transition-transform transform hover:scale-105 text-center"
+                        >
                             S'inscrire
+                        </a>
+                        <a
+                            href="/login"
+                            className="border-2 border-[#14FFEC] text-[#14FFEC] hover:bg-[#14FFEC] hover:text-[#0F2027] font-semibold px-6 py-3 rounded-xl transition-transform transform hover:scale-105 text-center"
+                        >
+                            Se connecter
                         </a>
                     </Motion.div>
                 </div>
@@ -56,9 +66,15 @@ const HomePage = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.7 }}
                     >
-                        <img src={workerImg} alt="Ouvrier" className="rounded-xl w-full h-64 object-cover mb-4 shadow-lg" />
+                        <img
+                            src={workerImg}
+                            alt="Ouvrier"
+                            className="rounded-xl w-full h-64 object-cover mb-4 shadow-lg"
+                        />
                         <h3 className="text-xl font-semibold text-[#FACC15]">Ouvrier Expert</h3>
-                        <p className="text-sm text-[#E2E8F0] mt-2">Disponible, expérimenté, et toujours prêt à servir dans votre région.</p>
+                        <p className="text-sm text-[#E2E8F0] mt-2">
+                            Disponible, expérimenté, et toujours prêt à servir dans votre région.
+                        </p>
                     </Motion.div>
 
                     <Motion.div
@@ -67,9 +83,15 @@ const HomePage = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ delay: 0.9 }}
                     >
-                        <img src={clientImg} alt="Client élégant" className="rounded-xl w-full h-64 object-cover mb-4 shadow-lg" />
+                        <img
+                            src={clientImg}
+                            alt="Client élégant"
+                            className="rounded-xl w-full h-64 object-cover mb-4 shadow-lg"
+                        />
                         <h3 className="text-xl font-semibold text-[#14FFEC]">Client Stylé</h3>
-                        <p className="text-sm text-[#E2E8F0] mt-2">En quête de qualité, d’élégance et d’un service digne de confiance.</p>
+                        <p className="text-sm text-[#E2E8F0] mt-2">
+                            En quête de qualité, d’élégance et d’un service digne de confiance.
+                        </p>
                     </Motion.div>
                 </div>
             </Motion.div>

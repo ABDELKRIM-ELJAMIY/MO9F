@@ -1,13 +1,15 @@
 
 
 import './App.css'
-// import HomePage from './pages/public/HomePage'
+import HomePage from './pages/public/HomePage'
 import RegistrationForms from './pages/public/RegistrationForms'
 import NotFound from './pages/public/NotFound'
+import Navbar from './components/Navbar'
 function App() {
   return (
     <>
-      {/* <HomePage /> */}
+      <Navbar/>
+      <HomePage />
 
      
       <RegistrationForms/>

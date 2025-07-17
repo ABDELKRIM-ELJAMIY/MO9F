@@ -67,7 +67,7 @@ const RegistrationForms = () => {
 
     const CustomField = ({ name, type, label }) => (
         <div className="mb-4">
-            <label htmlFor={name} className="block mb-1 text-sm font-semibold text-[#14FFEC]">
+            <label htmlFor={name} className="block mb-1 text-sm font-semibold text-[#23395d]">
                 {label}
             </label>
             <input
@@ -75,9 +75,9 @@ const RegistrationForms = () => {
                 type={type}
                 value={formData[name]}
                 onChange={(e) => handleInputChange(name, e.target.value)}
-                className={`w-full px-4 py-3 rounded-2xl bg-white/5 text-white border-2 transition-all duration-300 focus:outline-none focus:bg-white/10 focus:border-[#14FFEC] ${errors[name]
-                    ? 'border-red-400 bg-red-400/10'
-                    : 'border-white/20 hover:border-white/40'
+                className={`w-full px-4 py-3 rounded-2xl bg-white/40 text-[#23395d] border-2 transition-all duration-300 focus:outline-none focus:bg-white/70 focus:border-[#4e878c] ${errors[name]
+                    ? 'border-red-400 bg-red-400/10 text-red-700'
+                    : 'border-[#4e878c]/40 hover:border-[#4e878c]'
                     }`}
             />
             {errors[name] && (
@@ -106,18 +106,18 @@ const RegistrationForms = () => {
     };
 
     return (
-        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#0F2027] via-[#203A43] to-[#2C5364] px-4 py-8">
+        <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-[#23395d] via-[#4e878c] to-[#b85c38] px-4 py-8">
             <div className="relative">
-                <div className="absolute -top-4 -left-4 w-72 h-72 bg-[#14FFEC]/10 rounded-full blur-3xl animate-pulse"></div>
-                <div className="absolute -bottom-4 -right-4 w-72 h-72 bg-[#14FFEC]/5 rounded-full blur-3xl animate-pulse delay-1000"></div>
+                <div className="absolute -top-4 -left-4 w-72 h-72 bg-[#4e878c]/10 rounded-full blur-3xl animate-pulse"></div>
+                <div className="absolute -bottom-4 -right-4 w-72 h-72 bg-[#c9a227]/10 rounded-full blur-3xl animate-pulse delay-1000"></div>
 
-                <div className="relative bg-white/10 backdrop-blur-2xl p-8 rounded-3xl w-full max-w-2xl shadow-2xl border border-white/20">
-                    <div className="flex mb-8 bg-white/5 rounded-2xl p-1 backdrop-blur-sm">
+                <div className="relative bg-white/10 backdrop-blur-2xl p-8 rounded-3xl w-full max-w-2xl shadow-2xl border-2 border-[#4e878c]">
+                    <div className="flex mb-8 bg-white/5 rounded-2xl p-1 backdrop-blur-sm border border-[#4e878c]/30">
                         <button
                             onClick={() => handleTabChange('client')}
                             className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all duration-500 ${activeForm === 'client'
-                                ? 'bg-[#14FFEC] text-black shadow-lg shadow-[#14FFEC]/30 transform scale-105'
-                                : 'text-white/70 hover:text-white hover:bg-white/10'
+                                ? 'bg-[#23395d] text-white shadow-lg shadow-[#23395d]/30 transform scale-105 border-2 border-[#c9a227]'
+                                : 'text-[#23395d] hover:text-white hover:bg-[#4e878c]/20 border-2 border-transparent'
                                 }`}
                         >
                             Client
@@ -125,8 +125,8 @@ const RegistrationForms = () => {
                         <button
                             onClick={() => handleTabChange('ouvrier')}
                             className={`flex-1 py-3 px-4 rounded-xl font-semibold transition-all duration-500 ${activeForm === 'ouvrier'
-                                ? 'bg-[#14FFEC] text-black shadow-lg shadow-[#14FFEC]/30 transform scale-105'
-                                : 'text-white/70 hover:text-white hover:bg-white/10'
+                                ? 'bg-[#23395d] text-white shadow-lg shadow-[#23395d]/30 transform scale-105 border-2 border-[#c9a227]'
+                                : 'text-[#23395d] hover:text-white hover:bg-[#4e878c]/20 border-2 border-transparent'
                                 }`}
                         >
                             Ouvrier
@@ -134,13 +134,13 @@ const RegistrationForms = () => {
                     </div>
 
                     <div className="text-center mb-8">
-                        <h2 className="text-3xl font-bold text-white mb-2">
+                        <h2 className="text-3xl font-bold text-[#23395d] mb-2">
                             Créer un compte
                         </h2>
-                        <p className="text-gray-400 text-lg">
+                        <p className="text-[#4e878c] text-lg">
                             {activeForm === 'client' ? 'Espace Client' : 'Espace Ouvrier'}
                         </p>
-                        <div className="w-20 h-1 bg-gradient-to-r from-[#14FFEC] to-transparent rounded-full mx-auto mt-4"></div>
+                        <div className="w-20 h-1 bg-gradient-to-r from-[#c9a227] to-transparent rounded-full mx-auto mt-4"></div>
                     </div>
 
                     <div className="space-y-6">
@@ -186,9 +186,9 @@ const RegistrationForms = () => {
                         <button
                             onClick={handleSubmit}
                             disabled={!isFormValid()}
-                            className={`w-full py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform ${isFormValid()
-                                ? 'bg-gradient-to-r from-[#14FFEC] to-[#0fdac5] text-black hover:scale-105 hover:shadow-lg hover:shadow-[#14FFEC]/40 active:scale-95'
-                                : 'bg-gray-600/50 text-gray-400 cursor-not-allowed'
+                            className={`w-full py-4 rounded-2xl font-bold text-lg transition-all duration-300 transform border-4 ${isFormValid()
+                                ? 'bg-[#23395d] text-white border-[#4e878c] hover:bg-[#4e878c] hover:border-[#b85c38] hover:scale-105 hover:shadow-xl active:scale-95'
+                                : 'bg-gray-600/50 text-gray-400 border-gray-400/30 cursor-not-allowed'
                                 }`}
                         >
                             {isFormValid() ? (
@@ -204,8 +204,8 @@ const RegistrationForms = () => {
                         </button>
                     </div>
 
-                    <div className="text-center mt-8 text-gray-400 text-sm">
-                        <p>Déjà un compte ? <span className="text-[#14FFEC] hover:underline cursor-pointer">Se connecter</span></p>
+                    <div className="text-center mt-8 text-[#4e878c] text-sm">
+                        <p>Déjà un compte ? <span className="text-[#23395d] font-bold hover:underline cursor-pointer">Se connecter</span></p>
                     </div>
                 </div>
             </div>
